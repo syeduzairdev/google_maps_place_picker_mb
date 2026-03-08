@@ -3,7 +3,7 @@ import 'package:google_maps_place_picker_mb/src/components/rounded_frame.dart';
 
 class FloatingCard extends StatelessWidget {
   const FloatingCard({
-    Key? key,
+    super.key,
     this.topPosition,
     this.leftPosition,
     this.rightPosition,
@@ -14,7 +14,7 @@ class FloatingCard extends StatelessWidget {
     this.elevation = 0.0,
     this.color,
     this.child,
-  }) : super(key: key);
+  });
 
   final double? topPosition;
   final double? leftPosition;

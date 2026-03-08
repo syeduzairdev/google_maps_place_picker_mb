@@ -86,7 +86,9 @@ class PlaceProvider extends ChangeNotifier {
     }
 
     _currentPosition = await Geolocator.getCurrentPosition(
-      desiredAccuracy: desiredAccuracy ?? LocationAccuracy.best,
+      locationSettings: LocationSettings(
+        accuracy: desiredAccuracy ?? LocationAccuracy.best,
+      ),
     );
   }
 
@@ -97,22 +99,17 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Timer? _debounceTimer;
-  Timer? get debounceTimer => _debounceTimer;
-  set debounceTimer(Timer? timer) {
-    _debounceTimer = timer;
-    notifyListeners();
-  }
+  Timer? debounceTimer;
 
   CameraPosition? _previousCameraPosition;
   CameraPosition? get prevCameraPosition => _previousCameraPosition;
-  setPrevCameraPosition(CameraPosition? prePosition) {
+  void setPrevCameraPosition(CameraPosition? prePosition) {
     _previousCameraPosition = prePosition;
   }
 
   CameraPosition? _currentCameraPosition;
   CameraPosition? get cameraPosition => _currentCameraPosition;
-  setCameraPosition(CameraPosition? newPosition) {
+  void setCameraPosition(CameraPosition? newPosition) {
     _currentCameraPosition = newPosition;
   }
 
@@ -144,21 +141,21 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool _isSeachBarFocused = false;
-  bool get isSearchBarFocused => _isSeachBarFocused;
+  bool _isSearchBarFocused = false;
+  bool get isSearchBarFocused => _isSearchBarFocused;
   set isSearchBarFocused(bool focused) {
-    _isSeachBarFocused = focused;
+    _isSearchBarFocused = focused;
     notifyListeners();
   }
 
   MapType _mapType = MapType.normal;
   MapType get mapType => _mapType;
-  setMapType(MapType mapType, {bool notify = false}) {
+  void setMapType(MapType mapType, {bool notify = false}) {
     _mapType = mapType;
     if (notify) notifyListeners();
   }
 
-  switchMapType() {
+  void switchMapType() {
     _mapType = MapType.values[(_mapType.index + 1) % MapType.values.length];
     if (_mapType == MapType.none) _mapType = MapType.normal;
     notifyListeners();

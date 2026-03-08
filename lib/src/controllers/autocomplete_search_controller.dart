@@ -1,24 +1,24 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_maps_place_picker_mb/src/autocomplete_search.dart';
 
 class SearchBarController extends ChangeNotifier {
   late AutoCompleteSearchState _autoCompleteSearch;
 
-  attach(AutoCompleteSearchState searchWidget) {
+  void attach(AutoCompleteSearchState searchWidget) {
     _autoCompleteSearch = searchWidget;
   }
 
   /// Just clears text.
-  clear() {
+  void clear() {
     _autoCompleteSearch.clearText();
   }
 
   /// Clear and remove focus (Dismiss keyboard)
-  reset() {
+  void reset() {
     _autoCompleteSearch.resetSearchBar();
   }
 
-  clearOverlay() {
+  void clearOverlay() {
     _autoCompleteSearch.clearOverlay();
   }
 }
